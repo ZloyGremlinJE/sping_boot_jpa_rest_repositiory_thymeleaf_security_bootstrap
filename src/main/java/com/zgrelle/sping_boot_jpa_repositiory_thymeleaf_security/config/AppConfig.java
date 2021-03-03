@@ -1,5 +1,6 @@
 package com.zgrelle.sping_boot_jpa_repositiory_thymeleaf_security.config;
 
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
@@ -12,8 +13,9 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import javax.sql.DataSource;
 
 @Configuration
+@EnableAutoConfiguration
 @EnableJpaRepositories(basePackages={"${spring.data.jpa.repository.packages}"})
-public class DemoDataSourceConfig {
+public class AppConfig {
 	
 	@Primary
 	@Bean
@@ -30,9 +32,4 @@ public class DemoDataSourceConfig {
 				.build();
 	}
 
-	@Bean
-	@ConfigurationProperties(prefix="security.datasource")
-	public DataSource securityDataSource() {
-		return DataSourceBuilder.create().build();
-	}
 }
