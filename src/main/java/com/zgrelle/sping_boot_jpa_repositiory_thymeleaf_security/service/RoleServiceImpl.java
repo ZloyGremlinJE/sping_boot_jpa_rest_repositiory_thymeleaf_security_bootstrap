@@ -4,13 +4,11 @@ import com.zgrelle.sping_boot_jpa_repositiory_thymeleaf_security.dao.RoleReposit
 import com.zgrelle.sping_boot_jpa_repositiory_thymeleaf_security.entity.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-
 import java.util.Collection;
+import java.util.Optional;
 
 @Service
-public class RoleServiceImpl implements RoleService{
+public class RoleServiceImpl implements RoleService {
 
     private RoleRepository roleRepository;
 
@@ -22,11 +20,19 @@ public class RoleServiceImpl implements RoleService{
 
     @Override
     public Collection<Role> findAll() {
-        return null;
+        return roleRepository.findAll();
     }
 
     @Override
     public Role getRole(int id) {
-        return null;
+        Optional<Role> result = roleRepository.findById(id);
+        Role theRole;
+        if (result.isPresent()) {
+            theRole = result.get();
+        } else {
+            // we didn't find the employee
+            throw new RuntimeException("Did not find user id - " + id);
+        }
+        return theRole;
     }
 }
