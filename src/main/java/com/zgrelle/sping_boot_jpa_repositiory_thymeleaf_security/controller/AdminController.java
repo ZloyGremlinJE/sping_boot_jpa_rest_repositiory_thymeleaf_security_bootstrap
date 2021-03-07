@@ -29,7 +29,7 @@ public class AdminController {
     public String listCustomers(Model theModel) {
         List<User> theUsers = userService.getUsers();
         theModel.addAttribute("users", theUsers);
-        return "list-users";
+        return "bootstrap_test";//"list-users";
     }
 
     @GetMapping("/showFormForAdd")
