@@ -29,6 +29,9 @@ public class AdminController {
     public String listCustomers(Model theModel) {
         List<User> theUsers = userService.getUsers();
         theModel.addAttribute("users", theUsers);
+        User theUser = new User();
+        theModel.addAttribute("user", theUser);
+        theModel.addAttribute("roles", roleService.findAll());
         return "bootstrap_test";//"list-users";
     }
 
