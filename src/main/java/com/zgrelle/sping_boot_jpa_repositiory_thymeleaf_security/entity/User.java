@@ -19,14 +19,17 @@ public class User implements UserDetails {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "user_name")
-    private String userName;
+//    @Column(name = "user_name")
+//    private String userName;
 
     @Column(name = "first_name")
     private String firstName;
 
     @Column(name = "last_name")
     private String lastName;
+
+    @Column(name = "age")
+    private int age;
 
     @Column(name = "email")
     private String email;
@@ -50,13 +53,13 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+//    public String getUserName() {
+//        return userName;
+//    }
+//
+//    public void setUserName(String userName) {
+//        this.userName = userName;
+//    }
 
     public String getFirstName() {
         return firstName;
@@ -74,6 +77,14 @@ public class User implements UserDetails {
         this.lastName = lastName;
     }
 
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -81,6 +92,8 @@ public class User implements UserDetails {
     public void setEmail(String email) {
         this.email = email;
     }
+
+
 
     public String getPassword() {
         return password;
@@ -104,7 +117,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return userName;
+        return email;
     }
 
     @Override
@@ -142,11 +155,11 @@ public class User implements UserDetails {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return firstName.equals(user.firstName) && lastName.equals(user.lastName) && email.equals(user.email) && Objects.equals(userName, user.userName);
+        return firstName.equals(user.firstName) && lastName.equals(user.lastName) && email.equals(user.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, email, userName);
+        return Objects.hash(firstName, lastName, email);
     }
 }

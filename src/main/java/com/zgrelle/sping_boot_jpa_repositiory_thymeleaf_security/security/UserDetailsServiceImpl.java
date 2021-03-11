@@ -27,20 +27,3 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 }
 
-//    @Override
-//    @Transactional
-//    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-//without implements UserDetail and GrantedAuthority
-        /* User currentUser = userDAO.getUserByName(s);
-        if (currentUser == null) {
-            throw new UsernameNotFoundException("Unknown user: " + s);
-        }
-
-        UserDetails user = org.springframework.security.core.userdetails.User.builder()
-                .username(currentUser.getUserName())
-                .password(currentUser.getPassword())
-                .roles(currentUser.getRoles().stream().map(Role::getName).toArray(String[]::new))
-                .build();
-        return user;*/
-//       return userDAO.getUserByName(s);
-//    }
