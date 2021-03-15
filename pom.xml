@@ -11,8 +11,8 @@
 	<groupId>com.zgrelle</groupId>
 	<artifactId>sping_boot_jpa_repositiory_thymeleaf_security</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>sping_boot_jpa_repositiory_thymeleaf_security</name>
-	<description>Demo project for Spring Boot</description>
+	<name>sping_boot_jpa_rest_repository_thymeleaf_security</name>
+	<description>Preproject 3.1.3</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>

@@ -1,6 +1,7 @@
 package com.zgrelle.sping_boot_jpa_repositiory_thymeleaf_security.controller;
 
 
+import com.zgrelle.sping_boot_jpa_repositiory_thymeleaf_security.entity.User;
 import com.zgrelle.sping_boot_jpa_repositiory_thymeleaf_security.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -21,7 +22,18 @@ public class UserController {
     public String showFormUser(Model theModel, Authentication authentication) {
         String name = authentication.getName();
         theModel.addAttribute("user", userService.getUserByName(name));
+        return "user_readonly";
 
-        return "user_readonly";//"user-no-editable-form";
     }
+
+    @GetMapping("/getUser")
+    public User getUser(Model theModel, Authentication authentication) {
+        String name = authentication.getName();
+        //theModel.addAttribute("user", userService.getUserByName(name));
+
+        //return "user_readonly";"user-no-editable-form";
+        return userService.getUserByName(name);
+    }
+
+
 }

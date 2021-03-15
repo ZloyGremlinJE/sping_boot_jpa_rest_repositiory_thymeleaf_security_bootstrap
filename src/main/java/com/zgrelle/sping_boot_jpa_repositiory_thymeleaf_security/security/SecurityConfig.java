@@ -1,6 +1,5 @@
 package com.zgrelle.sping_boot_jpa_repositiory_thymeleaf_security.security;
 
-import com.zgrelle.sping_boot_jpa_repositiory_thymeleaf_security.security.SuccessUserHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -31,10 +30,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf()
-                .disable() //- попробуйте выяснить сами, что это даёт
+                .disable().cors().disable() //- попробуйте выяснить сами, что это даёт
                 .authorizeRequests()
                 .antMatchers("/admin/*").hasAnyRole("ADMIN")
                 .antMatchers("/user/*").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/userest/**").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/resources/**").permitAll()
                 .and()
                 .formLogin().successHandler(successUserHandler)
