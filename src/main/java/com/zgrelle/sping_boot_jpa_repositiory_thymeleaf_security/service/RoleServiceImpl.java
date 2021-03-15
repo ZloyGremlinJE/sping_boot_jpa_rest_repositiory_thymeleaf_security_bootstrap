@@ -30,7 +30,7 @@ public class RoleServiceImpl implements RoleService {
         if (result.isPresent()) {
             theRole = result.get();
         } else {
-            // we didn't find the employee
+            // we didn't find the user
             throw new RuntimeException("Did not find user id - " + id);
         }
         return theRole;

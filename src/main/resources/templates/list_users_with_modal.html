@@ -52,10 +52,7 @@
             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                 <a class="nav-link active" id="v-pills-admin-tab" data-toggle="tab" href="#admin-panel" role="tab"
                    aria-controls="v-pills-admin" aria-selected="true">Admin</a>
-                <a class="nav-link" id="v-pills-user-tab" onclick="function sayTest() {
-                   console.log('Ссылка активна! ');
-                }
-                sayTest()" data-toggle="tab" href="#user-panel" role="tab"
+                <a class="nav-link" id="v-pills-user-tab" data-toggle="tab" href="#user-panel" role="tab"
                    aria-controls="v-pills-user" aria-selected="false">User</a>
             </div>
         </div>
@@ -287,7 +284,8 @@
                                                                                placeholder="First name">
                                                                     </div>
                                                                     <div class="p-2">
-                                                                        <label for="lastName_d"><strong>Last name</strong></label>
+                                                                        <label for="lastName_d"><strong>Last
+                                                                            name</strong></label>
                                                                         <br/>
                                                                         <input type="text"
                                                                                th:value="${tempUser.lastName}"
@@ -302,7 +300,8 @@
                                                                         <input type="number"
                                                                                th:value="${tempUser.age}"
                                                                                readonly
-                                                                               class="form-control" name="age" id="age_d"
+                                                                               class="form-control" name="age"
+                                                                               id="age_d"
                                                                                placeholder="Age">
                                                                     </div>
                                                                     <div class="p-2">
@@ -320,8 +319,10 @@
                                                                         <label for="roles_d">User roles (multiple
                                                                             select):</label>
                                                                         <br/>
-                                                                        <select id="roles_d" required multiple="multiple"
-                                                                                class="form-control" name="roles" disabled>
+                                                                        <select id="roles_d" required
+                                                                                multiple="multiple"
+                                                                                class="form-control" name="roles"
+                                                                                disabled>
                                                                             <option th:each="role : ${roles}"
                                                                                     th:value="${{role.id}}"
                                                                                     th:selected="${#lists.contains(tempUser.roles,role)}"
@@ -425,12 +426,6 @@
                                 <td th:text="${principal_user.lastName}"/>
                                 <td th:text="${principal_user.age}"/>
                                 <td th:text="${principal_user.email}"/>
-                                <!--  <td>
-                                      <th:block th:each="r,authority : ${#authentication.getAuthorities()}">
-                                      <span th:if="${r.getAuthority().startsWith('ROLE_')}"
-                                      th:text="${r.getAuthority().replaceFirst('ROLE_', '')}"></span>
-                                      </th:block>
-                                  </td> -->
                                 <td th:text="${principal_roles}"/>
                             </tr>
                             </tbody>
@@ -451,6 +446,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-<script type="text/javascript" th:src="@{/js/test.js}"></script>
+<!--<script type="text/javascript" th:src="@{/js/test.js}"></script> -->
 </body>
 </html>

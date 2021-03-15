@@ -1,6 +1,5 @@
 package com.zgrelle.sping_boot_jpa_repositiory_thymeleaf_security.controller;
 
-import com.zgrelle.sping_boot_jpa_repositiory_thymeleaf_security.entity.Role;
 import com.zgrelle.sping_boot_jpa_repositiory_thymeleaf_security.entity.User;
 import com.zgrelle.sping_boot_jpa_repositiory_thymeleaf_security.service.RoleService;
 import com.zgrelle.sping_boot_jpa_repositiory_thymeleaf_security.service.UserService;
@@ -12,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,15 +40,7 @@ public class AdminController {
         String roleString = principalUser.getRoles().stream().map(role -> role.getName().replaceAll("ROLE_",""))
                 .collect(Collectors.joining(" "));
         theModel.addAttribute("principal_roles", roleString);
-        return "bootstrap_test";//"list-users";
-    }
-
-    @GetMapping("/showFormForAdd")
-    public String showFormForAdd(Model theModel) {
-        User theUser = new User();
-        theModel.addAttribute("user", theUser);
-        theModel.addAttribute("roles", roleService.findAll());
-        return "user-form";
+        return "list_users_with_modal";
     }
 
     @PostMapping("/saveUser")
@@ -78,16 +68,6 @@ public class AdminController {
     private void passwordChanged(User theUser, String encode) {
         encode = passwordEncoder.encode(encode);
         theUser.setPassword(encode);
-    }
-
-    @PostMapping("/showFormForUpdate")
-    public String showFormForUpdate(@RequestParam("userId") int theId,
-                                    Model theModel) {
-
-        User theUser = userService.getUser(theId);
-        theModel.addAttribute("user", theUser);
-        theModel.addAttribute("roles", roleService.findAll());
-        return "user-form";
     }
 
     @PostMapping("/delete")
