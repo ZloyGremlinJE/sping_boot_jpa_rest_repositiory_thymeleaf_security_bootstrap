@@ -22,7 +22,6 @@
         <!-- HEADER -->
 
         <header class="p-3 mb-2 bg-dark text-white">
-
             <div class="d-flex justify-content-between">
                 <div class=" mt-2">
                     <span th:text="${#authentication.principal.email}"></span>
@@ -84,7 +83,7 @@
 
                             <div class="container-fluid">
                                 <hr>
-                                <table class="table table-bordered table-striped">
+                                <table class="table table-bordered table-striped" id="users_info">
                                     <thead class="thead-dark">
                                     <tr>
                                         <th>ID</th>
@@ -446,6 +445,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-<!--<script type="text/javascript" th:src="@{/js/test.js}"></script> -->
+<!--<script type="text/javascript" th:src="@{/js/getUser.js}"></script> -->
 </body>
 </html>
