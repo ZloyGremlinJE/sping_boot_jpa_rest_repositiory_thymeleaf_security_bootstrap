@@ -417,16 +417,16 @@
                             </tr>
                             </thead>
 
-                            <tbody>
+                            <tbody id="body_users_table">
 
-                            <tr>
+                            <!--<tr>
                                 <td th:text="${principal_user.id}"/>
                                 <td th:text="${principal_user.firstName}"/>
                                 <td th:text="${principal_user.lastName}"/>
                                 <td th:text="${principal_user.age}"/>
                                 <td th:text="${principal_user.email}"/>
                                 <td th:text="${principal_roles}"/>
-                            </tr>
+                            </tr> -->
                             </tbody>
                         </table>
                     </div>
@@ -445,6 +445,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-<!--<script type="text/javascript" th:src="@{/js/getUser.js}"></script> -->
+<script type="text/javascript" th:src="@{/js/getUser.js}"></script>
 </body>
 </html>

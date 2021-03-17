@@ -10,16 +10,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/userrest")
-public class UserRest {
+@RequestMapping("/userAPI")
+public class UserRestController {
 
     @Autowired
     private UserService userService;
 
-    @GetMapping("/getUser")
+    @GetMapping("/getCurrentUser")
     public User getUser(Authentication authentication) {
-        String name = authentication.getName();
-        return userService.getUserByName(name);
+        User user = new User();
+
+        if(authentication!=null){
+            String name = authentication.getName();
+            user = userService.getUserByName(name);
+
+        }else {
+            user.setEmail("not authorized!");
+        }
+        return user;
     }
 
 

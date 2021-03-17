@@ -1,20 +1,18 @@
 async function getUser() {
-    const url = 'http://localhost:8090/userrest/getUser';
+    const url = 'http://localhost:8090/userAPI/getCurrentUser';
     let response = await fetch(url);
     if (response.ok) { // если HTTP-статус в диапазоне 200-299
         // получаем тело ответа (см. про этот метод ниже)
         jsonobj = await response.json();
         console.log(jsonobj);
-
-
-        renderdata('test_table', jsonobj);
+        renderuser('test_table', jsonobj);
     } else {
         alert("Ошибка HTTP: " + response.status);
     }
 
 }
 
-function renderdata(tableID, jsonobj) {
+function renderuser(tableID, jsonobj) {
 
     let tbody = document.getElementById('body_users_table');
     let row = document.createElement("TR");
@@ -42,6 +40,8 @@ function renderdata(tableID, jsonobj) {
     for (let i = 0; i < roles.length; i++) {
         roles_string = roles_string + roles[i].name + " ";
     }
+    console.log(roles_string);
+    roles_string.replace(new RegExp("ROLE_",'g'),"");
     console.log(roles_string);
     td_role.innerHTML = roles_string;
 }
