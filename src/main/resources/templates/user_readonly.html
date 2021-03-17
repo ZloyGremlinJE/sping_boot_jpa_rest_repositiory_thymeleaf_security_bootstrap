@@ -24,13 +24,15 @@
         <header class="p-3 mb-2 bg-dark text-white">
 
             <div class="d-flex justify-content-between">
-                <div class=" mt-2">
-                    <span th:text="${#authentication.principal.email}"></span>
+                <div class="mt-2" id="header_text">
+
+
+                   <!-- <span th:text="${#authentication.principal.email}"></span>
                     <span>with roles:</span>
                     <th:block th:each="r,authority : ${#authentication.getAuthorities()}">
                     <span th:if="${r.getAuthority().startsWith('ROLE_')}"
                           th:text="${r.getAuthority().replaceFirst('ROLE_', '')}"></span>
-                    </th:block>
+                    </th:block> -->
 
                 </div>
                 <div>
@@ -82,7 +84,7 @@
                             </tr>
                             </thead>
 
-                            <tbody id="body_users_table">
+                            <tbody id="body_user_table">
 
                          <!--   <tr>
                                 <td th:text="${user.id}"/>
@@ -105,7 +107,7 @@
                     <div class="row">
 
                         <div class="col-small">
-                            <button onclick="getUser()" type="button" class="btn btn-info btn-sm ml-4 mr-2">
+                            <button onclick="getAndShowUser()" type="button" class="btn btn-info btn-sm ml-4 mr-2">
                                 Add
                             </button>
                         </div>
@@ -137,6 +139,6 @@
         integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
         crossorigin="anonymous"></script>
 
-<script type="text/javascript" th:src="@{/js/getUser.js}"></script>
+<script type="text/javascript" th:src="@{/js/getAndShowUser.js}"></script>
 </body>
 </html>

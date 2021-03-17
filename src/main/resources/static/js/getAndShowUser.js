@@ -1,20 +1,20 @@
-async function getUser() {
-    const url = 'http://localhost:8090/userAPI/getCurrentUser';
+async function getAndShowUser() {
+    const url = 'http://localhost:8080/userAPI/getCurrentUser';
     let response = await fetch(url);
     if (response.ok) { // если HTTP-статус в диапазоне 200-299
         // получаем тело ответа (см. про этот метод ниже)
         jsonobj = await response.json();
         console.log(jsonobj);
-        renderuser('test_table', jsonobj);
+        renderuser('body_user_table', jsonobj);
     } else {
         alert("Ошибка HTTP: " + response.status);
     }
 
 }
 
-function renderuser(tableID, jsonobj) {
+function renderuser(tableUserBody, jsonobj) {
 
-    let tbody = document.getElementById('body_users_table');
+    let tbody = document.getElementById(tableUserBody);
     let row = document.createElement("TR");
     tbody.append(row);
     let td_id = document.createElement("TD");
@@ -35,16 +35,16 @@ function renderuser(tableID, jsonobj) {
     td_lastName.innerHTML = jsonobj.lastName.toString();
     td_age.innerHTML = jsonobj.age.toString();
     td_email.innerHTML = jsonobj.email.toString();
-     let roles = jsonobj.authorities;
-     let roles_string = "";
+    let roles = jsonobj.authorities;
+    let roles_string = "";
     for (let i = 0; i < roles.length; i++) {
         roles_string = roles_string + roles[i].name + " ";
     }
-    console.log(roles_string);
-    roles_string.replace(new RegExp("ROLE_",'g'),"");
-    console.log(roles_string);
+    roles_string = roles_string.replaceAll("ROLE_", "");
     td_role.innerHTML = roles_string;
+    let header = document.getElementById('header_text');
+    header.innerHTML = jsonobj.email.toString() + " with roles: " + roles_string;
 }
 
-getUser();
+void getAndShowUser();
 
