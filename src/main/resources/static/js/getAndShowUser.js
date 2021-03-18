@@ -1,5 +1,5 @@
 async function getAndShowUser() {
-    const url = 'http://localhost:8080/userAPI/getCurrentUser';
+    const url = 'http://localhost:8090/userAPI/getCurrentUser';
     let response = await fetch(url);
     if (response.ok) { // если HTTP-статус в диапазоне 200-299
         // получаем тело ответа (см. про этот метод ниже)

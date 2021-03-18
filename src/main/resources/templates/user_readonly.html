@@ -105,13 +105,9 @@
                         </table>
                     </div>
                     <div class="row">
-
                         <div class="col-small">
-                            <button onclick="getAndShowUser()" type="button" class="btn btn-info btn-sm ml-4 mr-2">
-                                Add
-                            </button>
+                            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal">Показать модальное окно</button>
                         </div>
-
                         <div class="col-small">
                             <button  type="button" class="btn btn-danger btn-sm">
                                 Delete
@@ -123,6 +119,24 @@
         </div>
     </div>
 </div>
+<!-- HTML-код модального окна -->
+<div id="myModal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Модальное окно с Ajax</h5>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            <div class="modal-body">
+                <!-- Контент загруженный из файла "remote.php" -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                <button type="button" class="btn btn-primary">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -130,15 +144,25 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
 
 <script
         src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
         integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
         crossorigin="anonymous"></script>
 
-<script type="text/javascript" th:src="@{/js/getAndShowUser.js}"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+
+
+ <script type="text/javascript" th:src="@{/js/getAndShowUser.js}"></script>
+
+<script>
+    $(document).on('show.bs.modal','#myModal', function () {
+        console.log('hi');
+    })
+</script>
+
 </body>
 </html>
