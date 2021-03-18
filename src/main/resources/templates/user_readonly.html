@@ -106,7 +106,7 @@
                     </div>
                     <div class="row">
                         <div class="col-small">
-                            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal">Показать модальное окно</button>
+                            <button type="button" id="btest" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#updateModal">Edit</button>
                         </div>
                         <div class="col-small">
                             <button  type="button" class="btn btn-danger btn-sm">
@@ -120,19 +120,102 @@
     </div>
 </div>
 <!-- HTML-код модального окна -->
-<div id="myModal" class="modal fade" tabindex="-1">
-    <div class="modal-dialog">
+<!-- Update modal -->
+<div class="modal fade" id="updateModal" role="dialog" tabindex="-1"
+     aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Модальное окно с Ajax</h5>
-                <button type="button" class="close" data-dismiss="modal">×</button>
+            <div class="modal-header text">
+                <h5 class="modal-title" id="updateModalLabel">Edit user</h5>
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
-                <!-- Контент загруженный из файла "remote.php" -->
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-                <button type="button" class="btn btn-primary">OK</button>
+                <form action="#" th:action="@{/admin/saveUser}" method="POST" class="formsave">
+                    <!-- Add hidden form field to handle update  th:object="${user}" method="POST" -->
+                    <input type="hidden"
+                           class="text"
+                           readonly size="50"
+                           name="id"/>
+                    <div class="d-flex justify-content-center ">
+                        <div class="d-flex flex-column text-center">
+                            <div class="p-2">
+                                <label for="id"><strong>ID</strong></label>
+                                <br/>
+                                <input disabled class="form-control" id="id"
+                                       readonly
+                                       type="number"
+                                       name="id">
+                            </div>
+                            <div class="p-2">
+                                <label for="firstName"><strong>First
+                                    name</strong></label>
+                                <br/>
+                                <input type="text"
+
+                                       class="form-control" name="firstName"
+                                       id="firstName"
+                                       placeholder="First name">
+                            </div>
+                            <div class="p-2">
+                                <label for="lastName"><strong>Last
+                                    name</strong></label>
+                                <br/>
+                                <input type="text"
+
+                                       class="form-control" name="lastName"
+                                       id="lastName"
+                                       placeholder="Last name">
+                            </div>
+                            <div class="p-2">
+                                <label for="age"><strong>Age</strong></label>
+                                <br/>
+                                <input type="number"
+                                       class="form-control" name="age" id="age"
+                                       placeholder="Age">
+                            </div>
+                            <div class="p-2">
+                                <label for="email"><strong>Email</strong></label>
+                                <br/>
+                                <input type="email"
+
+                                       class="form-control" name="email"
+                                       id="email"
+                                       placeholder="Email">
+                            </div>
+
+                            <div class="p-2">
+                                <label for="password"><strong>Password</strong></label>
+                                <br/>
+                                <input type="password"
+
+                                       class="form-control" name="password"
+                                       id="password"
+                                       placeholder="Password">
+                            </div>
+
+
+                            <div class="p-2">
+                                <label for="roles">User roles (multiple
+                                    select):</label>
+                                <br/>
+                                <select id="roles" required multiple="multiple"
+                                        class="form-control" name="roles">
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                                data-dismiss="modal">Close
+                        </button>
+                        <button type="submit" class="btn btn-primary">Edit
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -158,11 +241,11 @@
 
  <script type="text/javascript" th:src="@{/js/getAndShowUser.js}"></script>
 
-<script>
+<!--<script>
     $(document).on('show.bs.modal','#myModal', function () {
         console.log('hi');
     })
-</script>
+</script> -->
 
 </body>
 </html>

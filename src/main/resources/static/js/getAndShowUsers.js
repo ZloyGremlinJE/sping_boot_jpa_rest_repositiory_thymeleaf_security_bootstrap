@@ -1,10 +1,10 @@
 async function getAndShowUsers() {
-    const url = 'http://localhost:8090/adminAPI/list';
+    const url = 'http://localhost:8080/adminAPI/list';
     let response = await fetch(url);
 
     if (response.ok) { // если HTTP-статус в диапазоне 200-299
         // получаем тело ответа (см. про этот метод ниже)
-        jsonobj = await response.json();
+        user_json = await response.json();
         console.log(jsonobj);
         renderusers('body_users_table', jsonobj);
     } else {
@@ -16,7 +16,7 @@ async function getAndShowUsers() {
 function renderusers(bodyUsersTable, jsonobj) {
 
     let tbody = document.getElementById(bodyUsersTable);
-    //create row and column with data from jsonobj
+    //create row and column with data from user_json
     for (let i = 0; i < jsonobj.length; i++) {
         let row = document.createElement("TR");
         tbody.append(row);
