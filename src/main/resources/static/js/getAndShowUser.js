@@ -1,5 +1,5 @@
 let user_json;
-const url_user = 'http://localhost:8080/userAPI/getCurrentUser';
+const url_user = 'http://localhost:8090/userAPI/getCurrentUser';
 
 async function getAndShowUser() {
 
@@ -52,7 +52,8 @@ function renderuser(tableUserBody, jsonobj) {
     btn.setAttribute('data-test',JSON.stringify(jsonobj));
 }
 
-$(document).on('shown.bs.modal','#updateModal', function (e) {
+$(document).on('show.bs.modal','#updateModal', function (e) {
+    document.getElementById("roles").options.length = 0;
     let jsonstring = e.relatedTarget.dataset.test;
     let jsonobject = JSON.parse(jsonstring);
     console.log(jsonstring);
@@ -69,9 +70,13 @@ $(document).on('shown.bs.modal','#updateModal', function (e) {
     input_modal.eq(3).val(jsonobject.age);
     input_modal.eq(4).val(jsonobject.email);
     let roles = jsonobject.roles;
-   input_modal.eq(6).append($("<option>").text(roles[0].name).val(roles[0].name));
+    input_modal.eq(6).append($("<option>").text(roles[0].name).val(roles[0].name));
 
 })
+
+$(document).on('hide.bs.modal','#updateModal', function (e){
+
+});
 
 void getAndShowUser();
 

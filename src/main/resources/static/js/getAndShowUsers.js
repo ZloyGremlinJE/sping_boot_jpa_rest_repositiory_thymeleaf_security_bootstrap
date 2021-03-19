@@ -1,17 +1,42 @@
-async function getAndShowUsers() {
-    const url = 'http://localhost:8080/adminAPI/list';
-    let response = await fetch(url);
 
-    if (response.ok) { // если HTTP-статус в диапазоне 200-299
-        // получаем тело ответа (см. про этот метод ниже)
-        user_json = await response.json();
-        console.log(jsonobj);
-        renderusers('body_users_table', jsonobj);
-    } else {
-        alert("Ошибка HTTP: " + response.status);
+let API =function (){
+    return {
+        getUsers: async function(){
+            const url = 'http://localhost:8090/adminAPI/list';
+            let users_json;
+            let response = await fetch(url);
+
+            if (response.ok) { // если HTTP-статус в диапазоне 200-299
+                // получаем тело ответа (см. про этот метод ниже)
+                users_json = await response.json();
+                console.log(users_json);
+                renderusers('body_users_table', users_json);
+            } else {
+                alert("Ошибка HTTP: " + response.status);
+            }
+            return users_json;
+        }
     }
 
 }
+
+
+
+
+// async function getAndShowUsers() {
+//     const url = 'http://localhost:8090/adminAPI/list';
+//     let response = await fetch(url);
+//
+//     if (response.ok) { // если HTTP-статус в диапазоне 200-299
+//         // получаем тело ответа (см. про этот метод ниже)
+//        let users_json = await response.json();
+//         console.log(users_json);
+//         renderusers('body_users_table', users_json);
+//     } else {
+//         alert("Ошибка HTTP: " + response.status);
+//     }
+//
+// }
 
 function renderusers(bodyUsersTable, jsonobj) {
 
@@ -63,4 +88,6 @@ function renderusers(bodyUsersTable, jsonobj) {
 
 }
 
-getAndShowUsers();
+// getAndShowUsers();
+let api = API();
+api.getUsers();
