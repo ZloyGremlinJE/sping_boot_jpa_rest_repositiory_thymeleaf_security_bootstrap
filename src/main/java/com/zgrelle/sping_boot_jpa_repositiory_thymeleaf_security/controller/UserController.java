@@ -29,9 +29,6 @@ public class UserController {
     @GetMapping("/getUser")
     public User getUser(Model theModel, Authentication authentication) {
         String name = authentication.getName();
-        //theModel.addAttribute("user", userService.getUserByName(name));
-
-        //return "user_readonly";"user-no-editable-form";
         return userService.getUserByName(name);
     }
 
