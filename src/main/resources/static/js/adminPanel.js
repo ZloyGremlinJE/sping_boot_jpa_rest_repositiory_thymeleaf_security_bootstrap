@@ -76,8 +76,26 @@
 //
 // });
 
+// user
+
+class Role{
+    id;
+    name;
+}
+
+class User{
+    id;
+    firstName;
+    lastName;
+    age;
+    email;
+    password;
+    roles = [];
+}
+
 let adminAPI = function () {
     let url_users = 'http://localhost:8080/adminAPI/list';
+    let url_save_user = 'http://localhost:8080/adminAPI/saveUser';
     return {
         getUsers: async function () {
             let users_json;
@@ -88,6 +106,18 @@ let adminAPI = function () {
                 alert("Ошибка HTTP: " + response.status);
             }
             return users_json;
+        },
+        saveUser: async function (user) {
+            let response = await fetch(url_save_user, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify(user)
+            });
+
+            let result = await response.json();
+            alert(result.message);
         }
     }
 };
@@ -95,12 +125,14 @@ let adminAPI = function () {
 
 $(function () {
     let api = adminAPI();
+    // document.getElementById('save_form').addEventListener('submit', submitForm);
 
     function updateUsers() {
         let tbody = $('#body_users_table');
         let roles_text;
         tbody.empty();
         api.getUsers().then(users_json => {
+            console.log(users_json);
             for (let i = 0; i < users_json.length; i++) {
                 roles_text = users_json[i].roles.map(r => r.name).map(r => r.replaceAll("ROLE_", "")).join(' ');
                 let tr = $('<tr/>')
@@ -113,10 +145,7 @@ $(function () {
                     .append($('<td/>')
                         .append('<button type="button" class="btn btn-info btn-sm ml-4 mr-2" data-toggle="modal" data-target="#updateModal">Edit</button>')
                         .append('<button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal">Delete</button>')
-                    )
-                ;
-
-
+                    );
                 tbody.append(tr);
             }
         });
@@ -124,6 +153,73 @@ $(function () {
 
 
 
+    let role_admin = new Role();
+    role_admin.id = 1;
+    role_admin.name = "ROLE_ADMIN";
+
+    let role_user = new Role();
+    role_user.id = 2;
+    role_user.name = "ROLE_USER";
+
+    let user = new User();
+    user.id = 0;
+    user.firstName = "Don";
+    user.lastName = "Slon";
+    user.age = 45;
+    user.email = "rr@gmail.com";
+    user.password = 1;
+    user.roles.push(role_admin,role_user );
+    // user.roles.push( role_user);
+    let json_user = JSON.stringify(user);
+    console.log(user);
+    console.log(json_user);
+   api.saveUser(user);
 
     updateUsers();
+    // function submitForm(event) {
+    //     // Отменяем стандартное поведение браузера с отправкой формы
+    //     event.preventDefault();
+    //
+    //     // event.target — это HTML-элемент form
+    //     let formData = new FormData(event.target);
+    //
+    //     // Собираем данные формы в объект
+    //     let obj = {};
+    //     formData.forEach((value, key) => obj[key] = value);
+    //     let saveForm = $('#save_form');
+    //     let userRolesSelect = saveForm.find('#user_roles');
+    //     obj[userRolesSelect.attr('name')].push(userRolesSelect.find('option:selected').map(function () {
+    //         return $(this).val());
+    //     }).toArray();
+    //      console.log(obj);
+    //     // Собираем запрос к серверу
+    //     let request = new Request(event.target.action, {
+    //         method: 'POST',
+    //         body: JSON.stringify(obj),
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //     });
+    //
+    //     // Отправляем (асинхронно!)
+    //     fetch(request).then(
+    //         function(response) {
+    //             // Запрос успешно выполнен
+    //             console.log(response);
+    //             // return response.json() и так далее см. документацию
+    //         },
+    //         function(error) {
+    //             // Запрос не получилось отправить
+    //             console.error(error);
+    //         }
+    //     );
+    //
+    //     // Код после fetch выполнится ПЕРЕД получением ответа
+    //     // на запрос, потому что запрос выполняется асинхронно,
+    //     // отдельно от основного кода
+    //     console.log('Запрос отправляется');
+    // }
+
+
+
 });
