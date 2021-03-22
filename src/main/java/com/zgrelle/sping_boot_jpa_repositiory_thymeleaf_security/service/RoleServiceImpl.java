@@ -4,7 +4,8 @@ import com.zgrelle.sping_boot_jpa_repositiory_thymeleaf_security.dao.RoleReposit
 import com.zgrelle.sping_boot_jpa_repositiory_thymeleaf_security.entity.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.Collection;
+
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,7 +20,7 @@ public class RoleServiceImpl implements RoleService {
 
 
     @Override
-    public Collection<Role> findAll() {
+    public List<Role> findAll() {
         return roleRepository.findAll();
     }
 

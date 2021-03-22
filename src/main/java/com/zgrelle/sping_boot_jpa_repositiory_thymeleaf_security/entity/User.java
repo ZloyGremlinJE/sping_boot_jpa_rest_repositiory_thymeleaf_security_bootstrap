@@ -11,7 +11,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email")})
@@ -21,9 +20,6 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-
-//    @Column(name = "user_name")
-//    private String userName;
 
     @Column(name = "first_name")
     private String firstName;
@@ -41,8 +37,7 @@ public class User implements UserDetails {
     private String password;
 
 
-    @ManyToMany(fetch = FetchType.EAGER,
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(fetch = FetchType.EAGER)
     @JsonIgnore
     private Set<Role> roles = new HashSet<>();
 
@@ -50,13 +45,13 @@ public class User implements UserDetails {
 
     }
 
-    public Set<Role> getRoleTitles() {
+    public Set<Role> getRolesFromJson() {
         return roles;
     }
 
     @JsonProperty("roles")
-    public void setRoleTitles(Set<Role> roleTitles) {
-        for (Role r:roleTitles
+    public void setRolesFromJson(Set<Role> rolesJson) {
+        for (Role r:rolesJson
              ) {
             addRole(r);
         };
