@@ -1,5 +1,5 @@
 let userAPI = function () {
-    let url_user = 'http://localhost:8090/userAPI/getCurrentUser';
+    let url_user = 'http://localhost:8080/userAPI/getCurrentUser';
     return {
         getUser: async function () {
             let user_json;

@@ -10,12 +10,12 @@ class User {
     age;
     email;
     password;
-    arr_roles = [];
+    roles = [];
 }
 
-const url_users = 'http://localhost:8090/adminAPI/list';
-const url_roles = 'http://localhost:8090/adminAPI/roles';
-const url_save_user = 'http://localhost:8090/adminAPI/saveUser';
+const url_users = 'http://localhost:8080/adminAPI/list';
+const url_roles = 'http://localhost:8080/adminAPI/roles';
+const url_save_user = 'http://localhost:8080/adminAPI/saveUser';
 
 
 let adminAPI = function () {
@@ -88,32 +88,47 @@ $(function () {
                 tbody.append(tr);
             }
         });
-
+        //добавляем все возможные роли в селект нового пользователя
         api.getRoles().then(roles_json=>{
             console.log(roles_json);
-
+       let roles = $('#user_roles_new_user');
+            $.each(roles_json, function(key, value) {
+                roles.append('<option value="' + value.id + '">' + value.name.replaceAll("ROLE_", "") + '</option>');
+            });
         })
     }
 
+
+     //собираем нового пользователя и отправляем запрос на его создание кликом по кнопке с id= "button_new_user"
     $('#button_new_user').click(function () {
         let new_user = new User();
 
-        let role_admin = new Role();
-        role_admin.id = 1;
-        role_admin.name = "ROLE_ADMIN";
-
-        let role_user = new Role();
-        role_user.id = 2;
-        role_user.name = "ROLE_USER";
-
-        new_user.arr_roles.push(role_admin, role_user);
-
+        //заполняем нового пользователя данными (у всех полей ввода на вкладке с id="newuser" атрибут class="form-control"
         $('#newuser .form-control').each(function (index, element) {
             new_user[element.name] = element.value;
         });
-        new_user.id = 0;
-        console.log(new_user);
-    });
+        new_user.id = 0;//поскольку новый , то id=0
+
+       //получаем массив выбранных ролей и добавляем их новому пользователю
+      let userRolesSelect = $('#user_roles_new_user');
+      let selected_roles =  userRolesSelect.find('option:selected').map(function () {
+            let role = new Role();
+            role.id = $(this).val();
+            role.name = "ROLE_"+ $(this).text();
+            return role ;
+        }).toArray();
+        new_user.roles = selected_roles;
+
+        //очищаем поля input  и селектора ролей
+        //отправляем нового пользователя и обновляем таблицу пользователей
+        api.saveUser(new_user).then(r =>{
+            $('#newuser').find('input').val('');
+            $('#user_roles_new_user').find('option').remove();
+            updateUsers();
+            $('#users').tab('show');
+        });
+
+     });
 
 
     updateUsers();
