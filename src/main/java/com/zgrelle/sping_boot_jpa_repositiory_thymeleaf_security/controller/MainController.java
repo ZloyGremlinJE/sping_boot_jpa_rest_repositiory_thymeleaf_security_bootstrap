@@ -9,7 +9,7 @@ import java.security.Principal;
 
 @Controller
 @RequestMapping("/")
-public class AdminController {
+public class MainController {
 
 
     @GetMapping("/main")
