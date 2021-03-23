@@ -42,9 +42,9 @@
     <div class="row">
         <div class="col-md-2">
             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                <a class="nav-link active" id="v-pills-admin-tab" data-toggle="tab" href="#admin-panel" role="tab"
+                <a sec:authorize="hasRole('ROLE_ADMIN')" class="nav-link" th:classappend="${#strings.contains(#authentication.principal.authorities,'ADMIN')} ? 'active' : ''" id="v-pills-admin-tab" data-toggle="tab" href="#admin-panel" role="tab"
                    aria-controls="v-pills-admin" aria-selected="true">Admin</a>
-                <a class="nav-link" id="v-pills-user-tab" data-toggle="tab" href="#user-panel" role="tab"
+                <a class="nav-link" th:classappend="${!#strings.contains(#authentication.principal.authorities,'ADMIN')} ? 'active' : ''" id="v-pills-user-tab"  data-toggle="tab" href="#user-panel" role="tab"
                    aria-controls="v-pills-user" aria-selected="false">User</a>
             </div>
         </div>
@@ -52,7 +52,7 @@
 
         <div class="col-md-10">
             <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="admin-panel" role="tabpanel"
+                <div sec:authorize="hasRole('ROLE_ADMIN')" class="tab-pane fade" th:classappend="${#strings.contains(#authentication.principal.authorities,'ADMIN')} ? 'show active' : ''" id="admin-panel" role="tabpanel"
                      aria-labelledby="admin-panel-tab">
                     <div>
                         <h2>Admin panel</h2>
@@ -451,7 +451,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="user-panel" role="tabpanel" aria-labelledby="user-panel-tab">
+                <div class="tab-pane fade" th:classappend="${!#strings.contains(#authentication.principal.authorities,'ADMIN')} ? 'show active' : ''" id="user-panel" role="tabpanel" aria-labelledby="user-panel-tab">
                     <div>
                         <h2>User information-page</h2>
                     </div>

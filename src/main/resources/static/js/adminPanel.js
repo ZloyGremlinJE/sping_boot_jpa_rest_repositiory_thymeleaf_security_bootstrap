@@ -13,9 +13,9 @@ class User {
     roles = [];
 }
 
-const url_users = 'http://localhost:8080/adminAPI/list';
-const url_roles = 'http://localhost:8080/adminAPI/roles';
-const url_save_user = 'http://localhost:8080/adminAPI/saveUser';
+const url_users = 'http://localhost:8090/adminAPI/list';
+const url_roles = 'http://localhost:8090/adminAPI/roles';
+const url_save_user = 'http://localhost:8090/adminAPI/saveUser';
 
 
 let adminAPI = function () {
@@ -26,8 +26,6 @@ let adminAPI = function () {
             let response = await fetch(url_users);
             if (response.ok) {
                 users_json = await response.json();
-            } else {
-                alert("Ошибка HTTP: " + response.status);
             }
             return users_json;
         },
@@ -37,8 +35,6 @@ let adminAPI = function () {
             let response = await fetch(url_roles);
             if (response.ok) {
                 roles_json = await response.json();
-            } else {
-                alert("Ошибка HTTP: " + response.status);
             }
             return roles_json;
         },
@@ -125,7 +121,7 @@ $(function () {
             $('#newuser').find('input').val('');
             $('#user_roles_new_user').find('option').remove();
             updateUsers();
-            $('#users').tab('show');
+            $('.nav-tabs a[href="#users"]').tab('show');
         });
 
      });
