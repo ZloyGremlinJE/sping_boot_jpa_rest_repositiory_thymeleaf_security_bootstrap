@@ -61,9 +61,9 @@ public class AdminRestController {
         theUser.setPassword(encode);
     }
 
-    @PostMapping("/delete")
-    public ResponseEntity<Integer> deleteUser(@RequestBody Integer theId) {
-        userService.deleteUser(theId);
-        return ResponseEntity.ok().build();
+    @PostMapping("/deleteUser")
+    public ResponseEntity<?> deleteUser(@RequestBody User theUser) {
+        userService.deleteUser(theUser.getId());
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

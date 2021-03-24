@@ -11,10 +11,8 @@ import java.security.Principal;
 @RequestMapping("/")
 public class MainController {
 
-
     @GetMapping("/main")
-    public String getMainPage(Model model, Principal principal) {
-
+    public String getMainPage() {
         return "list_users_with_modal";
     }
 }
